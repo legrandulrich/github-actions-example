@@ -15,8 +15,8 @@ jobs:
     permissions:
       contents: read
       security-events: write
-      # Nécessaire pour la mise à jour du graphe de dépendances
-      dependencies: write
+      # Pour les dépôts avec GitHub Advanced Security activé, utilisez:
+      # dependencies: write
 
     steps:
       - uses: actions/checkout@v4
@@ -29,8 +29,9 @@ jobs:
       - name: Build with Maven
         run: mvn clean install
 
-      # Mise à jour du graphe de dépendances
-      - name: Update dependency graph
-        uses: advanced-security/maven-dependency-submission-action@v3
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+      # Si vous avez besoin de mettre à jour le graphe de dépendances et que vous avez
+      # GitHub Advanced Security, décommentez cette étape
+      # - name: Update dependency graph
+      #   uses: advanced-security/maven-dependency-submission-action@v3
+      #   with:
+      #     token: ${{ secrets.GITHUB_TOKEN }}
